@@ -27,4 +27,3 @@ func Run() {
 type server interface {
 	ListenAndServe() error
 }
-

@@ -19,7 +19,7 @@ func Routers() *gin.Engine {
 	var Router = gin.Default()
 
 	// https
-	Router.Use(middleware.LoadTls())
+	//Router.Use(middleware.LoadTls())
 
 	// 跨域
 	Router.Use(middleware.Cors())
