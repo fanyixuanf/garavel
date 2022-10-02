@@ -11,7 +11,6 @@ package bootstrap
 import (
 	"fmt"
 	"garavel/config"
-	"garavel/utils"
 	"github.com/gin-gonic/gin"
 	"go.uber.org/zap"
 	"net/http"
@@ -35,7 +34,7 @@ func httpServer(config *config.Server, router *gin.Engine) *http.Server {
 }
 
 func newApp(config *config.Server, log *zap.Logger, h *http.Server) *App {
-	return &App{
+	return &App {
 		config: config,
 		httpServer: h,
 		log: log,
@@ -44,7 +43,7 @@ func newApp(config *config.Server, log *zap.Logger, h *http.Server) *App {
 
 func (app *App) Run() error {
 
-	app.log.Info(utils.RootPath())
+	app.log.Info("port: ", zap.Any("port:", app.config.System.Addr))
 	if err := app.httpServer.ListenAndServe(); err != nil && err != http.ErrServerClosed {
 		panic(err)
 	}

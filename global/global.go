@@ -17,6 +17,7 @@ import (
 const (
 	ConfigEnv = "G_CONFIG"
 	ConfigFile = "env.yaml"
+	ResourcePath = "resources/**/*"
 )
 
 var (

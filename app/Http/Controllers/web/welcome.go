@@ -15,5 +15,6 @@ import (
 )
 
 func Welcome (c *gin.Context) {
+	global.G_LOG.Info("my logs ")
 	c.HTML(200, "view/index.html", gin.H{"title": global.G_CONFIG.System.Name, "address": fmt.Sprintf("http://127.0.0.1:%d", global.G_CONFIG.System.Addr)})
 }

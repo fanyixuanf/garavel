@@ -15,7 +15,7 @@ import (
 // Injectors from wire.go:
 
 func InitializeApp(server *config.Server, logger *zap.Logger) (*App, error) {
-	engine := initialize.Routers()
+	engine := initialize.Routers(server)
 	server2 := httpServer(server, engine)
 	app := newApp(server, logger, server2)
 	return app, nil

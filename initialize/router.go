@@ -9,16 +9,15 @@
 package initialize
 
 import (
-	"garavel/global"
+	"garavel/config"
 	"garavel/global/middleware"
 	"garavel/routes"
+	"garavel/utils"
 	"github.com/gin-gonic/gin"
-	"github.com/google/wire"
+	"path/filepath"
 )
 
-var ProviderSet = wire.NewSet(Routers)
-
-func Routers() *gin.Engine {
+func Routers(config *config.Server) *gin.Engine {
 	var Router = gin.Default()
 
 	// https
@@ -32,7 +31,8 @@ func Routers() *gin.Engine {
 	routes.InitApiRouter(RouterGroup)
 
 	// web
-	Router.LoadHTMLGlob(global.G_CONFIG.System.ResourcePath)
+	//Router.LoadHTMLGlob(global.G_CONFIG.System.ResourcePath)
+	Router.LoadHTMLGlob(filepath.Join(utils.RootPath(), "../", config.System.ResourcePath))
 	routes.InitWebRouter(RouterGroup)
 
 	return Router

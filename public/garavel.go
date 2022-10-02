@@ -21,6 +21,7 @@ import (
 	"go.uber.org/zap"
 	"go.uber.org/zap/zapcore"
 	"os"
+	"path/filepath"
 	"time"
 )
 
@@ -31,7 +32,7 @@ var (
 	level  zapcore.Level
 	writer zapcore.WriteSyncer
 	log *zap.Logger
-	vp *viper.Viper
+	rootPath = utils.RootPath()
 )
 
 func main() {
@@ -53,13 +54,14 @@ func init() {
 func initConfig() {
 	flag.StringVar(&confPath, "c", "", "choose config file.")
 	flag.Parse()
-	if confPath == "" { // 优先级: 命令行 > 环境变量 > 默认值
+	if confPath == "" {
+		// 优先级: 命令行 > 环境变量 > 默认值
 		if configEnv := os.Getenv(global.ConfigEnv); configEnv == "" {
-			confPath =  "../" + global.ConfigFile
-			fmt.Printf("您正在使用config的默认值,config的路径为%v\n", global.ConfigFile)
+			confPath =  filepath.Join(rootPath, "../", global.ConfigFile)
+			fmt.Printf("您正在使用config的默认值,config的路径为%v\n", confPath)
 		} else {
 			confPath = configEnv
-			fmt.Printf("您正在使用GVA_CONFIG环境变量,config的路径为%v\n", confPath)
+			fmt.Printf("您正在使用G_CONFIG环境变量,config的路径为%v\n", confPath)
 		}
 	} else {
 		fmt.Printf("您正在使用命令行的-c参数传递的值,config的路径为%v\n", confPath)
@@ -86,7 +88,7 @@ func initConfig() {
 	if err := v.Unmarshal(&global.G_CONFIG); err != nil {
 		fmt.Println(err)
 	}
-	vp = v
+	global.G_VP = v
 }
 
 func initLog() {
@@ -128,6 +130,7 @@ func initLog() {
 	if config.Zap.ShowLine {
 		log.WithOptions(zap.AddCaller())
 	}
+	global.G_LOG = log
 }
 
 // getWriteSyncer zap logger中加入file-rotatelogs
@@ -187,5 +190,5 @@ func getEncoderCore() (core zapcore.Core) {
 
 // CustomTimeEncoder 自定义日志输出时间格式
 func CustomTimeEncoder(t time.Time, enc zapcore.PrimitiveArrayEncoder) {
-	enc.AppendString(t.Format(config.Zap.Prefix + "2006/01/02 - 15:04:05.000"))
+	enc.AppendString(t.Format(config.Zap.Prefix + "2006-01-02 - 15:04:05.000"))
 }
