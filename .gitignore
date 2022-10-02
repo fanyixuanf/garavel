@@ -1,0 +1,17 @@
+.idea/
+.DS_Store
+
+# local env files
+env.yaml
+.idea
+.vscode
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+*.iml
+tmp
+storage
+public/tmp
+public/storage
