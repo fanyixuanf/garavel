@@ -8,8 +8,27 @@
 */
 package main
 
-import Core "garavel/bootstrap"
+import (
+	"garavel/bootstrap"
+	"garavel/config"
+	"go.uber.org/zap"
+)
 
 func main () {
-	Core.Run()
+	//initializeApp()
+
+	//msg := NewMessage()
+	//greeter := NewGreeter(msg)
+	//evet := NewEvent(greeter)
+	//evet.start()
+	app, err := boostrap.InitializeApp(conf, zapa)
+	if err != nil {
+		zapa.Info("New App error")
+	}
+	app.Run()
 }
+
+var (
+	conf *config.System
+	zapa *zap.Logger
+)

@@ -12,13 +12,14 @@
 package boostrap
 
 import (
+	appConfig "garavel/config"
 	"garavel/initialize"
 	"github.com/google/wire"
-	"net/http"
+	"go.uber.org/zap"
 )
 
 // init application.
-func initializeApp(h *http.Server) (*App, error) {
+func InitializeApp(*appConfig.System, *zap.Logger) (*App, error) {
 	panic(
 		wire.Build(
 			initialize.ProviderSet,

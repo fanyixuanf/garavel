@@ -27,5 +27,4 @@ var (
 	G_VP     *viper.Viper
 	G_LOG    *zap.Logger
 	G_READDB *gorm.DB
-	G_IPINFO config.Ipinfo
 )

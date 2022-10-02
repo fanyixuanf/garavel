@@ -10,10 +10,13 @@ package initialize
 
 import (
 	"garavel/global"
-	"garavel/middleware"
+	"garavel/global/middleware"
 	"garavel/router"
 	"github.com/gin-gonic/gin"
+	"github.com/google/wire"
 )
+
+var ProviderSet = wire.NewSet(Routers)
 
 func Routers() *gin.Engine {
 	var Router = gin.Default()
