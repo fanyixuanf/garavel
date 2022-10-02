@@ -1,9 +1,9 @@
 /*
-@Time : 2022/9/25 17:37
+@Time : 2022/10/2 18:20 
 @Author : Yuxue.fan<fanyixuanf+go@gmail.com>
-@File : gorm
+@File : web
 @Software: GoLand
 @Description:
 @Version: 1.0.0
 */
-package initialize
+package routes
