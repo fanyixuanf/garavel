@@ -11,6 +11,7 @@ env.yaml
 *.sln
 *.sw?
 *.iml
-./storage
-vendor
-vendors
+tmp
+storage
+public/tmp
+public/storage

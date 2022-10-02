@@ -1,4 +1,5 @@
-
+//go:build wireinject
+// +build wireinject
 
 /*
 @Time : 2022/10/2 18:24
