@@ -13,7 +13,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func InitWebRouter(router *gin.RouterGroup) (R gin.IRoutes) {
+func (r *Routers) InitWebRouter(router *gin.RouterGroup) (R gin.IRoutes) {
 	webRouter := router.Group("")
 	{
 		webRouter.GET("/", web.Welcome)

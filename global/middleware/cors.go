@@ -13,7 +13,7 @@ import (
 	"net/http"
 )
 
-func Cors() gin.HandlerFunc {
+func (c *Cors) Handler() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		method := c.Request.Method
 		origin := c.Request.Header.Get("Origin")
@@ -27,4 +27,10 @@ func Cors() gin.HandlerFunc {
 		}
 		c.Next()
 	}
+}
+
+type Cors struct {}
+
+func NewCors() *Cors {
+	return &Cors{}
 }

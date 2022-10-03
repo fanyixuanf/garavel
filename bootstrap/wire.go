@@ -13,7 +13,9 @@ package bootstrap
 
 import (
 	"garavel/config"
+	"garavel/global/middleware"
 	"garavel/initialize"
+	"garavel/routes"
 	"github.com/google/wire"
 	"go.uber.org/zap"
 )
@@ -22,6 +24,8 @@ func InitializeApp(*config.Server, *zap.Logger) (*App, error) {
 	panic(
 		wire.Build(
 			initialize.ProviderSet,
+			middleware.ProviderSet,
+			routes.ProviderSet,
 			newApp,
 			httpServer,
 		),

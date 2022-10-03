@@ -8,14 +8,18 @@ package bootstrap
 
 import (
 	"garavel/config"
+	"garavel/global/middleware"
 	"garavel/initialize"
+	"garavel/routes"
 	"go.uber.org/zap"
 )
 
 // Injectors from wire.go:
 
 func InitializeApp(server *config.Server, logger *zap.Logger) (*App, error) {
-	engine := initialize.Routers(server)
+	cors := middleware.NewCors()
+	routers := routes.NewRouter()
+	engine := initialize.Routers(server, cors, routers)
 	server2 := httpServer(server, engine)
 	app := newApp(server, logger, server2)
 	return app, nil
