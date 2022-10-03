@@ -10,4 +10,4 @@ package initialize
 
 import "github.com/google/wire"
 
-var ProviderSet = wire.NewSet(Routers)
+var ProviderSet = wire.NewSet(Routers, GormReadHandler, GormWriteHandler)
