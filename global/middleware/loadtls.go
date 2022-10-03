@@ -14,7 +14,7 @@ import (
 	"github.com/unrolled/secure"
 )
 
-func LoadTls() gin.HandlerFunc {
+func (l *LoadTls) LoadTlsHandler() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		middleware := secure.New(secure.Options{
 			SSLRedirect: true,
@@ -28,3 +28,4 @@ func LoadTls() gin.HandlerFunc {
 		c.Next()
 	}
 }
+

@@ -19,7 +19,8 @@ import (
 func InitializeApp(server *config.Server, logger *zap.Logger) (*App, error) {
 	cors := middleware.NewCors()
 	routers := routes.NewRouter()
-	engine := initialize.Routers(server, cors, routers)
+	loadTls := middleware.NewLoadTls()
+	engine := initialize.Routers(server, cors, routers, loadTls)
 	server2 := httpServer(server, engine)
 	app := newApp(server, logger, server2)
 	return app, nil

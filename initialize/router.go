@@ -17,14 +17,14 @@ import (
 	"path/filepath"
 )
 
-func Routers(config *config.Server, cors *middleware.Cors, routes *routes.Routers) *gin.Engine {
+func Routers(config *config.Server, cors *middleware.Cors, routes *routes.Routers, tls *middleware.LoadTls) *gin.Engine {
 	var Router = gin.Default()
 
 	// https
-	//Router.Use(middleware.LoadTls())
+	//Router.Use(tls.LoadTlsHandler())
 
 	// 跨域
-	Router.Use(cors.Handler())
+	Router.Use(cors.CorsHandler())
 
 	RouterGroup := Router.Group("")
 	// api

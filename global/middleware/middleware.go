@@ -10,4 +10,16 @@ package middleware
 
 import "github.com/google/wire"
 
-var ProviderSet = wire.NewSet(NewCors)
+var ProviderSet = wire.NewSet(NewCors, NewLoadTls)
+
+type Cors struct {}
+
+func NewCors() *Cors {
+	return &Cors{}
+}
+
+type LoadTls struct {}
+
+func NewLoadTls () *LoadTls {
+	return &LoadTls{}
+}
