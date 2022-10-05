@@ -36,14 +36,15 @@ var (
 )
 
 func main() {
-	app, err :=bootstrap.InitializeApp(config, log)
+
+	app,cleanup ,err :=bootstrap.InitializeApp(config, log)
 	if err != nil {
 		panic(err)
 	}
 	if err := app.Run(); err != nil {
 		panic(err)
 	}
-
+	defer cleanup()
 }
 
 func init() {

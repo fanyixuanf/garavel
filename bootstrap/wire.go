@@ -20,7 +20,7 @@ import (
 	"go.uber.org/zap"
 )
 
-func InitializeApp(*config.Server, *zap.Logger) (*App, error) {
+func InitializeApp(*config.Server, *zap.Logger) (*App,func(), error) {
 	panic(
 		wire.Build(
 			initialize.ProviderSet,

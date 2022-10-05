@@ -18,7 +18,7 @@ import (
 	"os"
 )
 
-func GormWriteHandler (config *config.Server, log *zap.Logger) *WriteDb {
+func GormWriteHandler (config *config.Server, log *zap.Logger) *gorm.DB {
 	dsn := config.Mysql.Username + ":" + config.Mysql.Password + "@tcp(" + config.Mysql.Path + ")/" + config.Mysql.Dbname + "?" + config.Mysql.Config
 	mysqlConfig := mysql.Config{
 		DSN:                       dsn,   // DSN data source name
@@ -34,7 +34,7 @@ func GormWriteHandler (config *config.Server, log *zap.Logger) *WriteDb {
 		os.Exit(0)
 	} else {
 		log.Info("mysql connect success(write)")
-		return &WriteDb{db:db}
+		return db
 	}
 	return nil
 }

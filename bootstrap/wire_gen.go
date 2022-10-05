@@ -16,12 +16,13 @@ import (
 
 // Injectors from wire.go:
 
-func InitializeApp(server *config.Server, logger *zap.Logger) (*App, error) {
+func InitializeApp(server *config.Server, logger *zap.Logger) (*App, func(), error) {
 	cors := middleware.NewCors()
 	routers := routes.NewRouter()
 	loadTls := middleware.NewLoadTls()
 	engine := initialize.Routers(server, cors, routers, loadTls)
 	server2 := httpServer(server, engine)
 	app := newApp(server, logger, server2)
-	return app, nil
+	return app, func() {
+	}, nil
 }
