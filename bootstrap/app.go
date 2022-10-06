@@ -9,6 +9,7 @@
 package bootstrap
 
 import (
+	"context"
 	"fmt"
 	"garavel/config"
 	"github.com/gin-gonic/gin"
@@ -43,10 +44,23 @@ func newApp(config *config.Server, log *zap.Logger, h *http.Server) *App {
 
 func (app *App) Run() error {
 
-	app.log.Info("port: ", zap.Any("port:", app.config.System.Addr))
-	if err := app.httpServer.ListenAndServe(); err != nil && err != http.ErrServerClosed {
-		panic(err)
-	}
+	// 启动http server
+	go func() {
+		app.log.Info("http server started")
+		if err := app.httpServer.ListenAndServe(); err != nil && err != http.ErrServerClosed {
+			panic(err)
+		}
+	}()
 
+	return nil
+
+}
+
+func (app *App) Stop(ctx context.Context) error {
+	// 关闭 http server
+	app.log.Info("http server has been stop")
+	if err := app.httpServer.Shutdown(ctx); err != nil {
+		return err
+	}
 	return nil
 }

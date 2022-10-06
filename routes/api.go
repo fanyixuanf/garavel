@@ -8,12 +8,14 @@
 */
 package routes
 
-import "github.com/gin-gonic/gin"
+import (
+	"github.com/gin-gonic/gin"
+)
 
-func InitApiRouter(Router *gin.RouterGroup) (R gin.IRoutes) {
+func (r *Routers)InitApiRouter(Router *gin.RouterGroup) (R gin.IRoutes) {
 	ApiRouter := Router.Group("api")
 	{
-		//ApiRouter.POST("register", v1.Register)
+		//ApiRouter.GET("/register", web.Welcome)
 	}
 	return ApiRouter
 }

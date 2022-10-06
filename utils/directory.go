@@ -31,7 +31,7 @@ func RootPath() string {
 			rootDir = filepath.Dir(filepath.Dir(filepath.Dir(filename)))
 		}
 	}
-	return rootDir
+	return filepath.Join(rootDir, "..")
 }
 
 func PathExists(path string) (bool, error) {
