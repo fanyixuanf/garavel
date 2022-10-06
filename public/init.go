@@ -48,7 +48,7 @@ func initConfig() {
 	if confPath == "" {
 		// 优先级: 命令行 > 环境变量 > 默认值
 		if configEnv := os.Getenv(global.ConfigEnv); configEnv == "" {
-			confPath =  filepath.Join(rootPath, "../", global.ConfigFile)
+			confPath =  filepath.Join(rootPath, global.ConfigFile)
 			fmt.Printf("您正在使用config的默认值,config的路径为%v\n", confPath)
 		} else {
 			confPath = configEnv

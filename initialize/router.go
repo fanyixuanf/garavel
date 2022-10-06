@@ -9,6 +9,7 @@
 package initialize
 
 import (
+	"fmt"
 	"garavel/config"
 	"garavel/global/middleware"
 	"garavel/routes"
@@ -32,9 +33,9 @@ func Routers(config *config.Server, cors *middleware.Cors, routes *routes.Router
 
 	// web
 	//Router.LoadHTMLGlob(global.G_CONFIG.System.ResourcePath)
-	Router.LoadHTMLGlob(filepath.Join(utils.RootPath(), "../", config.System.ResourcePath))
-	Router.StaticFile("favicon.ico", "../resources/images/favicon.ico")
+	Router.LoadHTMLGlob(filepath.Join(utils.RootPath(), config.System.ResourcePath))
+	Router.StaticFile("favicon.ico", "./resources/images/favicon.ico")
 	routes.InitWebRouter(RouterGroup)
-
+	fmt.Println(utils.RootPath())
 	return Router
 }
