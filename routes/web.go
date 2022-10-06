@@ -9,14 +9,17 @@
 package routes
 
 import (
-	"garavel/app/Http/Controllers/web"
+	"fmt"
+	"garavel/global"
 	"github.com/gin-gonic/gin"
 )
 
 func (r *Routers) InitWebRouter(router *gin.RouterGroup) (R gin.IRoutes) {
 	webRouter := router.Group("")
 	{
-		webRouter.GET("/", web.Welcome)
+		webRouter.GET("/", func(c *gin.Context) {
+			c.HTML(200, "view/welcome.html", gin.H{"title": global.G_CONFIG.System.Name, "address": fmt.Sprintf("http://127.0.0.1:%d", global.G_CONFIG.System.Addr)})
+		})
 	}
 	return webRouter
 }
