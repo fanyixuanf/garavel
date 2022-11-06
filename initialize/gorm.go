@@ -30,10 +30,10 @@ func GormWriteHandler (config *config.Server, log *zap.Logger) *gorm.DB {
 	}
 	gormConfig := logConfig(config.Mysql.LogMode)
 	if db, err := gorm.Open(mysql.New(mysqlConfig), gormConfig); err != nil {
-		log.Error("mysql connect failed(write), err:", zap.Any("err", err))
+		log.Error("database connect failed(write), err:", zap.Any("err", err))
 		os.Exit(0)
 	} else {
-		log.Info("mysql connect success(write)")
+		log.Info("database connect success(write)")
 		return db
 	}
 	return nil
@@ -51,10 +51,10 @@ func GormReadHandler (config *config.Server, log *zap.Logger) *ReadDb {
 	}
 	gormConfig := logConfig(config.MysqlRead.LogMode)
 	if db, err := gorm.Open(mysql.New(mysqlConfig), gormConfig); err != nil {
-		log.Error("mysql connect failed, err(read):", zap.Any("err", err))
+		log.Error("database connect failed, err(read):", zap.Any("err", err))
 		os.Exit(0)
 	} else {
-		log.Info("mysql connect success(read)")
+		log.Info("database connect success(read)")
 		return &ReadDb{db:db}
 	}
 	return nil

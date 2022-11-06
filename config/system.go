@@ -32,7 +32,7 @@ type Server struct {
 	System  System  `mapstructure:"system" json:"system" yaml:"system"`
 	Captcha Captcha `mapstructure:"captcha" json:"captcha" yaml:"captcha"`
 	// gorm
-	Mysql      Mysql      `mapstructure:"mysql" json:"mysql" yaml:"mysql"`
+	Mysql      Mysql      `mapstructure:"database" json:"database" yaml:"database"`
 	MysqlRead  Mysql      `mapstructure:"mysqlread" json:"mysqlread" yaml:"mysqlread"`
 	Sqlite     Sqlite     `mapstructure:"sqlite" json:"sqlite" yaml:"sqlite"`
 	Sqlserver  Sqlserver  `mapstructure:"sqlserver" json:"sqlserver" yaml:"sqlserver"`
